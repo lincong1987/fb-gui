@@ -1,0 +1,796 @@
+/*
+ This file 's1' is part of Firebird Integrated Solution 1.0
+
+ Copyright (c) 2019 Lincong
+                                                 
+ Contact:  
+        Email: lincong1987@gmail.com   
+
+        QQ: 159257119                  
+                                             
+ See Usage at http://www.jplatformx.com/firebird
+
+ Create date: 2019-07-23 14:28         
+ */
+/*
+ This file 'reset.less' is part of Firebird Integrated Solution 1.0
+
+ Copyright (c) 2019 Lincong
+
+ Contact:  
+        Email: lincong1987@gmail.com
+
+        QQ: 159257119
+ 
+ See Usage at http://www.jplatformx.com/firebird
+
+ Create date: 2019-07-23 15:39
+ */
+html {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft YaHei", SimSun, sans-serif;
+  background: #000946;
+}
+#app {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  transform-origin: top left;
+}
+#app:empty:before {
+  content: "Loading...";
+  width: fit-content;
+  display: flex;
+  height: 100%;
+  margin: 15% auto;
+  color: #fff;
+  font-size: 20px;
+}
+.text--center {
+  text-align: center;
+}
+.text--left {
+  text-align: left;
+}
+.text--right {
+  text-align: right;
+}
+.text--break {
+  white-space: normal;
+  word-break: break-all;
+}
+.min-width-120 {
+  min-width: 120px;
+}
+.nowrap {
+  white-space: nowrap;
+}
+html {
+  overflow-x: visible !important;
+}
+/*
+ This file 'reset.less' is part of Firebird Integrated Solution 1.0
+
+ Copyright (c) 2019 Lincong
+
+ Contact:  
+        Email: lincong1987@gmail.com
+
+        QQ: 159257119
+ 
+ See Usage at http://www.jplatformx.com/firebird
+
+ Create date: 2019-07-23 15:39
+ */
+@font-face {
+  font-family: "DINPro-Bold";
+  src: url('DINPro-Bold.eot?t=1564254312317');
+  src: url('DINPro-Bold.eot?t=1564254312317#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'), url('DINPro-Bold.woff?t=1564254312317') format('woff'), url('DINPro-Bold.ttf?t=1564254312317') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */ url('DINPro-Bold.svg?t=1564254312317#iconfont') format('svg');
+  
+  /* IE9 */
+  /* iOS 4.1- */
+}
+.text-slider ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.progress-circle {
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+}
+.progress-circle .left-wrap {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+.progress-circle .right-wrap {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+.progress-circle .loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0% 50%;
+}
+.progress-circle .loader2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 100% 50%;
+}
+.progress-circle .inner-circle {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.drag-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: none;
+}
+.layer:hover .drag-handle {
+  display: block;
+}
+body {
+  overflow: hidden;
+}
+#app .container {
+  position: relative;
+}
+#app .container .toast {
+  position: absolute;
+  background: #333;
+  color: #ededed;
+  height: 0px;
+  line-height: 40px;
+  width: 300px;
+  top: -40px;
+  left: 50%;
+  margin-left: -150px;
+  margin-top: -20px;
+  text-align: center;
+  z-index: 9999999;
+  font-size: 14px;
+  border-radius: 5px;
+  opacity: 0;
+  box-shadow: 0 4px 12px #000000;
+}
+#app .container .toast.success {
+  background: #176714c4;
+  color: #75e270;
+}
+#app .container .toast.error {
+  background: #5d0909c4;
+  color: #f14e4e;
+}
+#app .container .toast.warn {
+  background-color: #656500c4;
+  color: #b7b700;
+}
+#app .container .toast.info {
+  background: #7d7d7dc4;
+  color: #efefef;
+}
+#app .container .toast.message {
+  background: #7d7d7dc4;
+  color: #efefef;
+}
+#app .container .toast.show {
+  opacity: 1;
+  height: 40px;
+  top: 30%;
+  transition: all 0.5s;
+}
+#app .container .editor-panel {
+  position: relative;
+  overflow: auto;
+  left: 150px;
+  right: 280px;
+  top: 60px;
+  bottom: 50px;
+  background: #eee;
+}
+#app .container .editor-panel .editor-container {
+  position: relative;
+  transform-origin: top left;
+  background: #000;
+  margin: 15px;
+}
+#app .container .editor-panel .editor-container .editor-container-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+#app .container .editor-panel .editor-container .editor-container-spacemove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  cursor: move;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.1);
+  display: none;
+}
+#app .container .editor-panel .editor-container .editor-container-spacemove.active {
+  z-index: 99999;
+  opacity: 1;
+  display: block;
+}
+#app .container .editor-panel .editor-container .editor-container-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  user-select: none;
+  display: none;
+}
+#app .container .editor-panel .editor-container .editor-container-line .line-x {
+  position: absolute;
+  overflow: hidden;
+  border: 1px dashed #5393FF;
+  box-sizing: border-box;
+  border-top: 0;
+  border-bottom: 0;
+  height: 100%;
+}
+#app .container .editor-panel .editor-container .editor-container-line .line-y {
+  position: absolute;
+  overflow: hidden;
+  border: 1px dashed #5393FF;
+  box-sizing: border-box;
+  border-left: 0;
+  border-right: 0;
+  width: 100%;
+}
+#app .container .editor-panel .editor-container .editor-container-line.active {
+  z-index: 99999;
+  opacity: 1;
+  display: block;
+}
+#app .container .editor-panel .editor-container .layer {
+  position: absolute;
+  background: transparent;
+}
+#app .container .editor-panel .editor-container .layer .drag-handle {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: move;
+}
+#app .container .editor-panel .editor-container .layer .px {
+  display: none;
+  position: absolute;
+  top: -20px;
+  left: -120px;
+  width: 120px;
+  height: 16px;
+  text-align: right;
+  right: 0;
+  bottom: 0;
+}
+#app .container .editor-panel .editor-container .layer .px span {
+  color: #fff;
+  font-size: 12px;
+  border-radius: 2px;
+  background: #43a2be94;
+  padding: 0 2px;
+}
+#app .container .editor-panel .editor-container .layer .active {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#app .container .editor-panel .editor-container .layer .group {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#app .container .editor-panel .editor-container .layer .mutil {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 0, 0.8) inset;
+}
+#app .container .editor-panel .editor-container .layer .resize-width {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 3px;
+  height: 3px;
+  margin-top: -2px;
+  background: #000;
+  border: 1px solid #fff;
+  cursor: ew-resize;
+}
+#app .container .editor-panel .editor-container .layer .resize-width:hover {
+  opacity: 1;
+}
+#app .container .editor-panel .editor-container .layer .resize-height {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 3px;
+  height: 3px;
+  margin-left: -2px;
+  background: #000;
+  border: 1px solid #fff;
+  cursor: ns-resize;
+}
+#app .container .editor-panel .editor-container .layer .resize-height:hover {
+  opacity: 1;
+}
+#app .container .editor-panel .editor-container .layer .resize-width-height {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 3px;
+  height: 3px;
+  background: #000;
+  border: 1px solid #fff;
+  cursor: nwse-resize;
+}
+#app .container .editor-panel .editor-container .layer .resize-width-height:hover {
+  opacity: 1;
+}
+#app .container .editor-panel .editor-container .layer .menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  background: #fff;
+  border: 1px solid #eee;
+  cursor: nwse-resize;
+  z-index: 9999999;
+  display: none;
+}
+#app .container .editor-panel .editor-container .layer .menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#app .container .editor-panel .editor-container .layer .menu ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#app .container .editor-panel .editor-container .layer .menu ul li a {
+  font-size: 12px;
+  display: block;
+  text-align: center;
+}
+#app .container .editor-panel .editor-container .layer.mutil-active .px {
+  display: block;
+}
+#app .container .editor-panel .editor-container .layer.mutil-active .mutil {
+  display: block;
+  cursor: move;
+}
+#app .container .editor-panel .editor-container .layer.mutil-active .drag-handle {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: red;
+  cursor: move;
+}
+#app .container .editor-panel .editor-container .layer:hover .drag-handle {
+  opacity: 0.5;
+  box-shadow: 0px 0px 0px 1px #09f inset;
+}
+#app .container .editor-panel .editor-container .layer:hover .active {
+  display: none;
+}
+#app .container .editor-panel .editor-container .layer:hover .resize-width {
+  display: none;
+  opacity: 1;
+}
+#app .container .editor-panel .editor-container .layer:hover .resize-height {
+  display: none;
+}
+#app .container .editor-panel .editor-container .layer:hover .resize-width-height {
+  display: none;
+}
+#app .container .editor-panel .editor-container .layer:hover .px {
+  display: block;
+  opacity: 0.8;
+}
+#app .container .editor-panel .editor-container .layer.active .px {
+  display: block;
+}
+#app .container .editor-panel .editor-container .layer.active .active {
+  display: block;
+  box-shadow: 0px 0px 0px 1px #09f inset;
+}
+#app .container .editor-panel .editor-container .layer.active .drag-handle {
+  display: block;
+  opacity: 0.5;
+}
+#app .container .editor-panel .editor-container .layer.active .resize-width {
+  display: block;
+  opacity: 0.5;
+}
+#app .container .editor-panel .editor-container .layer.active .resize-height {
+  display: block;
+  opacity: 0.5;
+}
+#app .container .editor-panel .editor-container .layer.active .resize-width-height {
+  display: block;
+  opacity: 0.5;
+}
+#app .container .editor-panel .editor-container .layer.hide {
+  display: none;
+}
+#app .container .editor-panel .editor-container .layer.layer-drag-start {
+  background: transparent;
+}
+#app .container .editor-panel .editor-container .layer.layer-drag-over .drag-handle {
+  display: block;
+}
+#app .container .editor-panel .editor-container .layer.group .group {
+  display: block;
+  box-shadow: 0px 0px 0px 1px #eee inset;
+}
+#app .container .editor-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 60px;
+  background: #0376ac;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  clear: both;
+}
+#app .container .editor-header .editor-header-logo {
+  width: 300px;
+  float: left;
+}
+#app .container .editor-header .editor-header-toolbar-left {
+  width: 300px;
+  float: left;
+  display: flex;
+  flex-wrap: wrap;
+}
+#app .container .editor-header .editor-header-toolbar-left button {
+  height: 60px;
+  text-align: center;
+  background: #039be5;
+  color: white;
+  margin-right: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  vertical-align: top;
+}
+#app .container .editor-header .editor-header-toolbar-left button:hover {
+  background: #11678f;
+}
+#app .container .editor-header .editor-header-toolbar-center {
+  width: 300px;
+  float: left;
+}
+#app .container .editor-header .editor-header-toolbar-center .btn {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  background: #039be5;
+  color: white;
+  margin-right: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  vertical-align: top;
+}
+#app .container .editor-header .editor-header-toolbar-center .btn:hover {
+  background: #11678f;
+}
+#app .container .editor-header .editor-header-toolbar-right {
+  width: 300px;
+  float: right;
+}
+#app .container .editor-header .editor-header-toolbar-right button {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  background: #039be5;
+  color: white;
+  margin-right: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  vertical-align: top;
+}
+#app .container .editor-header .editor-header-toolbar-right button:hover {
+  background: #11678f;
+}
+#app .container .layers-footer-panel {
+  position: absolute;
+  bottom: 0;
+  left: 150px;
+  right: 280px;
+  background-color: #fff;
+  z-index: 100;
+  height: 50px;
+  overflow: auto;
+}
+#app .container .layers-control-panel {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  background-color: #fff;
+  z-index: 100;
+  overflow: auto;
+}
+#app .container .layers-control-panel .layers-control-panel-list {
+  overflow: auto;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul {
+  padding: 0;
+  margin: 0;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #e7e7e7;
+  display: flex;
+  background: #fbfbfb;
+  transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  user-select: none;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li .mutil-check {
+  cursor: pointer;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li .mutil-check input {
+  vertical-align: top;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li .layer-control a {
+  display: block;
+  padding: 2px 0px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  font-size: 12px;
+  text-decoration: none;
+  color: #777;
+  user-select: none;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li .layer-control a div {
+  display: flex;
+  width: 112px;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li .layer-control a div em {
+  width: 2em;
+  color: #000;
+  font-style: normal;
+  margin-right: 4px;
+  font-size: 12px;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li .layer-control a div span {
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #000;
+  font-weight: bold;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li.active {
+  background: #ffafaf;
+}
+#app .container .layers-control-panel .layers-control-panel-list ul li.mutil {
+  background: #ff6;
+}
+#app .container .layers-detail-panel {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  right: 0;
+  width: 280px;
+  background-color: #fff;
+  z-index: 100;
+}
+#app .container .layers-detail-panel input[type=text] {
+  width: 200px;
+  font-size: 16px;
+  padding: 6px 8px;
+}
+#app .component-add-dialog {
+  position: absolute;
+  top: -3000px;
+  left: 150px;
+  width: 1000px;
+  height: 600px;
+  background: #333;
+  z-index: 100000;
+  overflow: auto;
+  color: #fff;
+  opacity: 0.1;
+  box-shadow: 2px 2px 20px #000;
+  border-radius: 4px;
+  transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#app .component-add-dialog.active {
+  opacity: 1;
+  top: 60px;
+}
+#app .component-add-dialog ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#app .component-add-dialog ul li {
+  margin: 5px 0 0 5px;
+  padding: 0;
+  list-style: none;
+  height: 60px;
+  width: 115px;
+  border: 1px solid #000;
+}
+#app .component-add-dialog ul li a {
+  background: #404040;
+  display: block;
+  height: 60px;
+  word-break: break-word;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
+}
+#app .component-add-dialog ul li a:hover {
+  background: #333;
+}
+#app .code-dialog {
+  position: absolute;
+  top: 0;
+  left: 3000px;
+  width: 100%;
+  height: 100%;
+  background: rgba(50, 50, 50, 0.618);
+  z-index: 1000000;
+  overflow: auto;
+  opacity: 0.1;
+  color: #fff;
+  transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#app .code-dialog.active {
+  opacity: 1;
+  left: 0;
+}
+#app .code-dialog #codeEditor {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#app .history-dialog {
+  position: absolute;
+  top: -3000px;
+  left: 300px;
+  width: 300px;
+  height: 100%;
+  background: #4d4d4d;
+  border: 1px solid #3b3b3b;
+  z-index: 0;
+  overflow: auto;
+  opacity: 0.1;
+  color: #fff;
+  transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  user-select: none;
+}
+#app .history-dialog.active {
+  opacity: 1;
+  z-index: 1000000;
+  top: 60px;
+}
+#app .history-dialog .history-dialog-header {
+  height: 30px;
+  background: #424242;
+  clear: both;
+  overflow: hidden;
+}
+#app .history-dialog .history-dialog-header span {
+  float: left;
+  color: #fff;
+  font-size: 12px;
+  margin: 6px 0 0 10px;
+}
+#app .history-dialog .history-dialog-header .close {
+  background: #424242;
+  color: #ddd;
+  border: 1px solid #424242;
+  margin: 4px 5px 0 5px;
+  cursor: pointer;
+  outline: none;
+  float: right;
+}
+#app .history-dialog .history-dialog-header .close:hover {
+  border: 1px solid #393939;
+}
+#app .history-dialog .history-dialog-body {
+  overflow: auto;
+}
+#app .history-dialog .history-dialog-body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#app .history-dialog .history-dialog-body ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid #464646;
+}
+#app .history-dialog .history-dialog-body ul li a {
+  background: #535353;
+  display: block;
+  height: 20px;
+  word-break: break-word;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 0 2px 10px;
+}
+#app .history-dialog .history-dialog-body ul li a:hover {
+  background: #5c5c5c;
+}
+#app .history-dialog .history-dialog-body ul li.cursor {
+  border-bottom: 1px solid #494949;
+}
+#app .history-dialog .history-dialog-body ul li.cursor a {
+  background: #6b6b6b;
+}
+#app .history-dialog .history-dialog-footer {
+  height: 30px;
+  background: #535353;
+  box-shadow: 0 0 -1px #4b4b4b;
+  border-top: 1px solid #414141;
+}
+#app .history-dialog .history-dialog-footer button {
+  background: #535353;
+  color: #dddddd;
+  border: 1px solid #535353;
+  margin: 4px 0 0 5px;
+  cursor: pointer;
+  outline: none;
+}
+#app .history-dialog .history-dialog-footer button:hover {
+  border: 1px solid #393939;
+}
+/*# sourceMappingURL=editor.css.map */

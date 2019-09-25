@@ -1,0 +1,47 @@
+<div class="container"
+
+style="
+		width: {{page.width}}px;
+		height: {{page.height}}px;
+		transform: scale({{window.width/page.width}}, {{window.width/page.width}});
+		transform-origin: top left;
+"
+>
+
+	{{#if LOADING === true}}
+		<div class="screen-loader">
+			<div class="screen-loader-progress"></div>
+		</div>
+	{{/if}}
+
+	{{#if GLOBAL_ERROR === true}}
+		<div class="screen-error">
+			{{_defaults(GLOBAL_ERROR_MESSAGE, "系统异常")}}
+		</div>
+	{{/if}}
+
+	{{#each layers:index}}
+		{{#if this.component}}
+			<Layer
+					id="{{id}}"
+					component="{{component}}"
+					model="options"
+					name="{{name}}"
+					top="{{top}}"
+					left="{{left}}"
+					height="{{height}}"
+					width="{{width}}"
+
+					length="{{length}}"
+					zIndex="{{layers.length - index}}"
+					hide="{{hide}}"
+					group="{{group}}"
+					scale="{{scale}}"
+					opacity="{{opacity}}"
+					backgroundColor="{{backgroundColor}}"
+					boxShadow="{{boxShadow}}"
+			/>
+		{{/if}}
+	{{/each}}
+
+</div>

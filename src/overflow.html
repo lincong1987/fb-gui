@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Loading...</title>
+	<!--	<link rel="stylesheet" href="resource/page.css">-->
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="resource/fb.js"></script>
+<script>
+	fb.dev(true);
+	//fb.use("resource/page");
+
+	define("overflow", function (require) {
+
+		let {$, dayjs, FireBird, Store, _} = require("fb-core");
+		let $window = $(window);
+		let $document = $(document);
+
+		window.$ = $;
+		window._ = _;
+		window.dayjs = dayjs;
+		window.DEBUG_LEVEL = 5;
+
+		let template = `
+			<div style="height: {{height}}px; width: {{width}}px; overflow: auto; margin: 0 auto;">
+				<iframe style="height: 100%; width: 100%;" ref="iframe" src="{{src}}" frameborder="0"></iframe>
+			</div>
+			`;
+
+		let app = window.app = new FireBird({
+			el: "#app",
+			template: template,
+			data() {
+				return {
+					src: "",
+					width: $window.width(),
+					height: $window.height()
+				}
+			},
+			methods: {
+				getParam() {
+					var url = location.search; //获取url中"?"符后的字串
+					var theRequest = new Object();
+					if (url.indexOf("?") != -1) {
+						var str = url.substr(1);
+						var strs = str.split("&");
+						console.log(strs)
+						for (var i = 0; i < strs.length; i++) {
+							theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+						}
+					}
+					return theRequest;
+				}
+			},
+			afterMount() {
+				var me = this;
+				var param = this.getParam();
+				if (param.width) {
+					this.set("width", param.width);
+				}
+				if (param.height) {
+					this.set("height", param.height);
+				}
+				this.set("src", `page.html?id=${param.id}`);
+			}
+		});
+
+
+	});
+
+	fb.use("overflow");
+</script>
+</body>
+</html>

@@ -1,0 +1,642 @@
+<div class="container" style="height: {{window.height}}px;">
+
+	<div class="toast {{#if !isEmpty(toast)}}show{{/if}} {{toastType}}">
+		{{toast}}
+	</div>
+
+	{{#if LOADING === true}}
+		<div class="screen-loader">
+			<div class="screen-loader-progress"></div>
+		</div>
+	{{/if}}
+
+	{{#if GLOBAL_ERROR === true}}
+		<div class="screen-error">
+			系统异常
+		</div>
+	{{/if}}
+
+	<div class="editor-header">
+		<div class="editor-header-logo">FB-DV alpha</div>
+		<div class="editor-header-toolbar-left">
+			<button type="button" on-click="unDo()">撤销</button>
+			<button type="button" on-click="reDo()">重做</button>
+			<button type="button" on-click="showHistory()">历史记录</button>
+		</div>
+		<div class="editor-header-toolbar-center">
+			<button class="btn" type="button" on-click="toggleComponentsDialog()">Add</button>
+			<button class="btn" type="button" on-click="showMode('mutil')">Mutil</button>
+			<button class="btn" type="button" on-click="showMode('page')">Page</button>
+		</div>
+		<div class="editor-header-toolbar-right">
+			<button type="button" on-click="getLayers()">保存图层</button>
+			<button type="button" on-click="getPage()">保存页面</button>
+			<button type="button" on-click="preview()">预览</button>
+		</div>
+	</div>
+
+	<div class="editor-panel" ref="editorPanel"
+	     style="
+			     width: {{window.width - 150 - 280}}px;
+			     height: {{window.height - 60 - 50}}px;
+			     ">
+		<div class="editor-container"
+		     lazy-click="320"
+		     on-click.c="showPageConfig()"
+		     style="
+				     width: {{page.width}}px;
+				     height: {{page.height}}px;
+				     transform: scale({{page.scale}}, {{page.scale}});
+
+				     ">
+
+			<div class="editor-container-spacemove {{#if keyCode === 32}}active{{/if}}"
+			     style="
+					     width: {{page.width}}px;
+					     height: {{page.height}}px;
+					     "
+			     ref="editorSpacemove"
+			     on-click="preventDefault($event)"
+			></div>
+
+			<div class="editor-container-grid" style="
+					width: {{page.width}}px;
+					height: {{page.height}}px;
+				{{#if page.showGrid === true}}
+				background-size: {{page.step}}px {{page.step}}px, {{page.step}}px {{page.step}}px;
+						background-image: linear-gradient(#ffffff1a 2px, #0000 0px), linear-gradient(90deg, #ffffff1a 2px, #0000 0px);
+				{{/if}}
+					"></div>
+
+			<div class="editor-container-line" style="display: none">
+				<div class="line-x"></div>
+				<div class="line-y"></div>
+			</div>
+
+			{{#each layers:index}}
+				{{#if this.component}}
+					<LayerEdit
+							id="{{id}}"
+							length="{{index}}"
+							component="{{component}}"
+							model="options"
+							name="{{name}}"
+							top="{{top}}"
+							left="{{left}}"
+							height="{{height}}"
+							width="{{width}}"
+							zIndex="{{layers.length - index}}"
+							hide="{{hide}}"
+							group="{{group}}"
+							scale="{{scale}}"
+							opacity="{{opacity}}"
+							backgroundColor="{{backgroundColor}}"
+							boxShadow="{{boxShadow}}"
+							mutil="{{mutil}}"
+							active="{{this.index === detail.data.length}}"
+					/>
+				{{/if}}
+			{{/each}}
+		</div>
+	</div>
+
+	<div class="layers-footer-panel">
+
+		<span>缩放比</span>
+		<input type="text" model="page.scale" style="width: 40px"/>
+		<button type="button" on-click="setScale('auto')">适合</button>
+		<button type="button" on-click="setScale(10)">10</button>
+		<button type="button" on-click="setScale(20)">20</button>
+		<button type="button" on-click="setScale(30)">30</button>
+		<button type="button" on-click="setScale(40)">40</button>
+		<button type="button" on-click="setScale(50)">50</button>
+		<button type="button" on-click="setScale(60)">60</button>
+		<button type="button" on-click="setScale(70)">70</button>
+		<button type="button" on-click="setScale(80)">80</button>
+		<button type="button" on-click="setScale(90)">90</button>
+		<button type="button" on-click="setScale(100)">100</button>
+		<button type="button" on-click="setScale(110)">110</button>
+		<button type="button" on-click="setScale(120)">120</button>
+		<button type="button" on-click="setScale(130)">130</button>
+		<button type="button" on-click="setScale(140)">140</button>
+		<button type="button" on-click="setScale(150)">150</button>
+		<button type="button" on-click="setScale(160)">160</button>
+		<button type="button" on-click="setScale(170)">170</button>
+		<button type="button" on-click="setScale(180)">180</button>
+		<button type="button" on-click="setScale(190)">190</button>
+		<button type="button" on-click="setScale(200)">200</button>
+		<button type="button" on-click="setScale(250)">250</button>
+		<button type="button" on-click="setScale(300)">300</button>
+		<button type="button" on-click="setScale(350)">350</button>
+		<button type="button" on-click="setScale(400)">400</button>
+		<button type="button" on-click="setScale(500)">500</button>
+		<button type="button" on-click="setScale(550)">550</button>
+		<button type="button" on-click="setScale(600)">600</button>
+		<button type="button" on-click="setScale(650)">650</button>
+		| 网格步进 <input type="input" model="page.step" style="width: 100px"/>
+		<label>
+			<input type="checkbox" model="page.showGrid"/> 显示网格
+		</label>
+
+	</div>
+	<div class="layers-control-panel" style="">
+
+		<div style="height: 60px;" class="layers-control-panel-header">
+			<h2 style="	margin: 0">图层</h2>
+			<button type="button" style="padding: 1px 4px 2px;" on-click="setZIndex('top')">置顶</button>
+			<button type="button" style="padding: 1px 4px 2px;" on-click="setZIndex('up')">上移</button>
+			<button type="button" style="padding: 1px 4px 2px;" on-click="setZIndex('down')">下移</button>
+			<button type="button" style="padding: 1px 4px 2px;" on-click="setZIndex('bottom')">置底</button>
+		</div>
+		<div class="layers-control-panel-list"
+		     style="height: {{window.height - 60 - 100}}px;"
+		     ref="layerList">
+			<ul style="margin-bottom: 100px;">
+				{{#each layers:index}}
+					<li class="{{#if this.index === detail.data.length}}active{{/if}} {{#if
+							(indexOf(mutil, index) != -1)}}mutil{{/if}}"
+					>
+						<div class="mutil-check" on-click="mutilSelectFast(index, $event)">
+							<input type="text" type="checkbox" on-click="mutilSelect(index)"
+							       {{#if (indexOf(mutil, index) != -1)}}checked="checked"{{/if}}
+							/>
+						</div>
+						<div class="layer-control">
+							<a href="javascript:;" on-click="showDetail(index, $event)" lazy="500"
+							   title="{{component}}">
+								<div>
+									<em>{{layers.length - index}}</em>
+									<span>{{component}}</span>
+								</div>
+								<div>
+									{{name}}
+								</div>
+
+							</a>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+
+	</div>
+	<div class="layers-detail-panel" style="height: {{window.height - 60 }}px;overflow: auto;">
+
+		{{#if mode === "page"}}
+			<div>
+				<div>Page Config</div>
+				<div>
+					<div>
+						<button type="button" on-click="newPage()">新建大屏</button>
+					</div>
+
+					<div>
+						<label>
+							<div>title</div>
+							<input type="text" model="page.title"/>
+						</label>
+					</div>
+					<div>
+						<label>
+							<div>width</div>
+							<input type="text" model="page.width"/>
+						</label>
+					</div>
+					<div>
+						<label>
+							<div>height</div>
+							<input type="text" model="page.height"/>
+						</label>
+					</div>
+					<div>
+						<label>
+							<div>scale</div>
+							<input type="text" model="page.scale"/>
+						</label>
+					</div>
+					<div>
+						<label>
+							<div>background type</div>
+							<select model="page.background">
+								<option value="color">color</option>
+								<option value="image">image</option>
+								<option value="video">video</option>
+							</select>
+						</label>
+					</div>
+					<div>
+						<label>
+							<div>background value</div>
+							<input type="text" model="page.backgroundValue"/>
+						</label>
+					</div>
+					<div>
+						<label>
+							<div>theme</div>
+							<select model="page.theme">
+								{{#each page.themeList}}
+									<option value="{{this}}">{{this}}</option>
+								{{/each}}
+							</select>
+						</label>
+					</div>
+
+					<div>
+						<label>
+							<div>component default scale</div>
+							<input type="text" model="component.defaults.scale"/>
+						</label>
+					</div>
+
+					<div>
+						<label>
+							<div>uuid</div>
+							<input type="text" model="page.id"/>
+						</label>
+					</div>
+
+					<div>
+						<label>
+							<div>layersUrl</div>
+							<input type="text" model="page.layersUrl"/>
+						</label>
+					</div>
+
+					<div>
+						<label>
+							<div>onInit</div>
+							<div>
+								<button type="button"
+								        on-click="openCodeEditor(page.onInit, 'page.onInit', 'onInit', null, null, $event)">
+									编辑
+								</button>
+
+							</div>
+							<textarea model="page.onInit"
+							          style="
+							          	width: 240px;
+							          	height: 150px;"
+							></textarea>
+						</label>
+					</div>
+
+				</div>
+
+
+			</div>
+		{{/if}}
+
+		{{#if mode === "mutil"}}
+
+			<div style="margin: 10px 0; border: 2px solid #ccc">
+				<div>多选模式</div>
+				<div>
+					<button type="button" on-click="clearMutil()" style="background: red">退出多选</button>
+				</div>
+				<div style="width: 220px;">
+					已选({{mutil.length}})： {{#each mutil}}{{this}},{{/each}}
+				</div>
+				<div>
+					对齐
+				</div>
+				<div>
+					<button type="button" on-click="mutilAlign('top_max')">顶边最大对齐</button>
+					<button type="button" on-click="mutilAlign('top_min')">顶边最小对齐</button>
+					<button type="button" on-click="mutilAlign('top_avg')">顶边平均对齐</button>
+
+					<button type="button" on-click="mutilAlign('bottom_max')">底边最大对齐</button>
+					<button type="button" on-click="mutilAlign('bottom_min')">底边最小对齐</button>
+					<button type="button" on-click="mutilAlign('bottom_avg')">底边平均对齐</button>
+
+					<button type="button" on-click="mutilAlign('left_max')">左边最大对齐</button>
+					<button type="button" on-click="mutilAlign('left_min')">左边最小对齐</button>
+					<button type="button" on-click="mutilAlign('left_avg')">左边平均对齐</button>
+
+					<button type="button" on-click="mutilAlign('right_max')">右边最大对齐</button>
+					<button type="button" on-click="mutilAlign('right_min')">右边最小对齐</button>
+					<button type="button" on-click="mutilAlign('right_min')">右边平均对齐</button>
+
+				</div>
+				<div>
+					居中
+				</div>
+				<div>
+					<button type="button" on-click="mutilAlign('vertical')">竖向居中</button>
+					<button type="button" on-click="mutilAlign('horizontal')">横向居中</button>
+				</div>
+				<div>
+					大小
+				</div>
+				<div>
+					<button type="button" on-click="mutilAlign('width_max')">按大等宽</button>
+					<button type="button" on-click="mutilAlign('width_min')">按小等宽</button>
+					<button type="button" on-click="mutilAlign('height_max')">按大等高</button>
+					<button type="button" on-click="mutilAlign('height_min')">按小等高</button>
+				</div>
+				<div>
+					精准平移
+				</div>
+				<div>
+					<button type="button" on-mousedown="mutilMove('top')">上</button>
+					<button type="button" on-mousedown="mutilMove('bottom')">下</button>
+					<button type="button" on-mousedown="mutilMove('left')">左</button>
+					<button type="button" on-mousedown="mutilMove('right')">右</button>
+				</div>
+				<div>
+					操作
+				</div>
+				<div>
+
+					<button type="button" on-mousedown="mutilLock(true)">锁定</button>
+					<button type="button" on-mousedown="mutilLock(false)">解锁</button>
+					<button type="button" on-mousedown="mutilCopy()">复制</button>
+					<button type="button" on-mousedown="mutilDel()">删除</button>
+
+				</div>
+				<div>
+					整体缩放
+				</div>
+				<div>
+					from
+					<input type="text" model="multiScaleFrom" value="1">
+					to
+					<input type="text" model="multiScaleTo" value="0.9">
+					<button type="button" on-mousedown="mutilScale()">执行</button>
+				</div>
+				<div>
+					同时设值
+				</div>
+				<div>
+					<div>
+						hide
+					</div>
+					<div>
+						<input type="checkbox"
+						       lazy-click="640"
+						       on-click="mutilValue($event, 'hide')"/>
+					</div>
+
+					<div>
+						scale
+					</div>
+					<div>
+						<input type="text"
+						       lazy-click="640"
+						       on-click="mutilValue($event, 'scale')"/>
+					</div>
+
+				</div>
+
+				<div>
+					<button type="button" on-click="clearMutil()" style="background: red">退出多选</button>
+				</div>
+			</div>
+
+
+		{{/if}}
+
+		{{#if mode === "detail"}}
+			<div>
+				图层{{detail.data.length}} 详情
+			</div>
+			<div>
+
+				<button type="button" on-click="copyLayer(detail.data.length)">copy</button>
+				<button type="button" on-click="removeLayer(detail.data.length)">remove</button>
+			</div>
+			<div style="margin-bottom: 50px;">
+				{{#each detail.define.attrs:key}}
+					<div>
+						<div>
+							<div>
+								{{name}}:
+							</div>
+							<div>
+
+								{{#partial componentPropType}}
+
+									{{#if type === "select"}}
+
+										<select lazy-change="640"
+										        on-change="updateLayer(keypath, name, detail.data.length, type, $event)">
+											{{#each optional:index}}
+
+												<option value="{{this}}"
+												        {{#if detail.data[keypath] == this}}selected{{/if}}
+												>{{this}}</option>
+
+											{{/each}}
+										</select>
+									{{/if}}
+
+
+									{{#if type === "select_object"}}
+
+										<select lazy-change="640"
+										        on-change="updateLayer(keypath, name, detail.data.length, type, $event)">
+											{{#each optional:key}}
+												<option value="{{key}}"
+												        {{#if detail.data[keypath] == key}}selected{{/if}}
+												>{{key}}</option>
+
+											{{/each}}
+										</select>
+									{{/if}}
+
+
+									{{#if type === "boolean"}}
+										<input type="checkbox"
+										       {{#if detail.data[keypath] === true}}checked="checked"{{/if}}
+										       lazy-click="640"
+										       on-click="updateLayer(keypath, name, detail.data.length, type, $event)"/>
+									{{/if}}
+
+									{{#if type === "function1"}}
+										<textarea
+												lazy-keyup="1640"
+												on-keyup="updateLayer(keypath, name, detail.data.length, type, $event)"
+										>{{detail.data[keypath]}}</textarea>
+									{{/if}}
+
+									{{#if type === "function_string"}}
+										<textarea
+												style="height: 20px; width: 150px"
+												lazy-keyup="1000"
+												on-keyup="updateLayer(keypath, name, detail.data.length, type, $event)">
+											{{detail.data[keypath]}}
+										</textarea>
+										<button type="button"
+										        lazy-click="1640"
+										        on-click="openCodeEditor(detail.data[keypath], keypath, name, detail.data.length, type, $event)">
+											编辑
+										</button>
+									{{/if}}
+
+									{{#if type === "json_string"}}
+										<textarea
+												style="height: 20px; width: 150px">
+											{{JSON_stringify(detail.data[keypath])}}
+										</textarea>
+										<button type="button"
+										        lazy-click="1640"
+										        on-click="openCodeEditorReadonly(detail.data[keypath], keypath, name, detail.data.length, type, $event)">
+											查看
+										</button>
+
+									{{/if}}
+
+									{{#if type === "px"}}
+										<input type="text" value="{{_defaults(detail.data[keypath], '')}}"
+										       lazy-keyup="160"
+										       on-keyup="updateLayer(keypath, name, detail.data.length, type, $event)"
+										       placeholder="请填写 {{key}}"/>
+									{{/if}}
+
+									{{#if type === "color"}}
+										<input type="color" value="{{_defaults(detail.data[keypath], '')}}"
+										       lazy-change="160"
+										       on-change="updateLayer(keypath, name, detail.data.length, type, $event)"
+										       placeholder="请填写 {{key}}"
+
+										       style="width: 60px"/>
+										<input type="text" value="{{_defaults(detail.data[keypath], '')}}"
+										       lazy-change="160"
+										       on-change="updateLayer(keypath, name, detail.data.length, type, $event)"
+										       placeholder="请填写 {{key}}"
+										       style="width: 60px;"
+										/>
+									{{/if}}
+
+
+									{{#if isUndefined(type) || type === "text"}}
+										<input type="text" value="{{_defaults(detail.data[keypath], '')}}"
+										       lazy-keyup="640"
+										       on-keyup="updateLayer(keypath, name, detail.data.length, type, $event)"
+										       placeholder="请填写 {{key}}"/>
+										<div>
+
+										</div>
+									{{/if}}
+
+
+
+
+								{{/partial}}
+
+								{{#if isArray(type)}}
+									<select>
+										{{#each type:i}}
+											<option value="{{this}}">{{this}}</option>
+										{{/each}}
+									</select>
+									{{> componentPropType}}
+								{{else}}
+									{{> componentPropType}}
+								{{/if}}
+
+
+							</div>
+						</div>
+					</div>
+
+				{{/each}}
+			</div>
+		{{/if}}
+
+	</div>
+
+	<div class="component-add-dialog {{#if dialogs.componentsAddPanel === true}}active{{/if}}">
+		<div>components</div>
+		<div>
+			<ul>
+				{{#each components:i}}
+					<li key="component-add-dialog-{{i}}">
+						<a href="javascript:;" on-click="addComponent($$name)">
+							<div>{{ attrs.name.defaults }}</div>
+							<div>{{ $$name }}</div>
+						</a>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+
+	<div class="code-dialog {{#if dialogs.codePanel === true}}active{{/if}}"
+	     style="
+			     height: {{window.height}}px;
+			     width: {{window.width}}px;
+			     "
+	>
+		<div
+				style="
+						height: {{window.height - 100}}px;
+						width: {{window.width - 100}}px;
+						"
+		>
+			<div style="
+					height: 30px;
+					width: {{window.width - 100}}px;
+					position: absolute;
+					left: 60px;
+					top: 30px;
+					background: #2D2D2D;
+					color: #b8b8b8;
+					text-align: center;
+					">code editor - {{tmp.codeEditor.keypath}}
+			</div>
+			<div style="
+					height: 30px;
+					width: {{window.width - 100}}px;
+					position: absolute;
+					left: 60px;
+					top: 60px; background: #414141;">
+				<button style="margin-left: 10px;" type="button" on-click="saveCode($event)">保存</button>
+				<button style="margin-left: 10px;" type="button" on-click="formatCode($event)">格式化</button>
+				<button style="margin-left: 10px;" type="button" on-click="cancelCodeEditor($event)">取消</button>
+			</div>
+			<div id="codeEditor"
+			     style="
+					     height: {{window.height - 100 - 60}}px;
+					     width: {{window.width - 100}}px;
+					     top: 90px;
+					     left: 60px;
+					     "
+			>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div class="history-dialog  {{#if dialogs.historyPanel === true}}active{{/if}}"
+	     style="
+			     height: {{window.height - 200}}px;
+			     "
+	>
+		<div class="history-dialog-header">
+			<span>历史记录 ({{history.length}})</span>
+			<button type="button" class="close" on-click="showHistory()">关闭</button>
+		</div>
+		<div class="history-dialog-body"
+		     style="
+				height: {{window.height - 200 - 62}}px;
+				">
+			<ul>
+				{{#each history:index}}
+					<li class="{{historyCursor == index ? 'cursor ' :' '}}">
+						<a href="javascript:;"
+						   on-click="gotoHistroy(time)"
+						>{{dayjs(time, 'HH:mm:ss')}} {{name}}</a>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="history-dialog-footer">
+			<button type="button" on-click="clearHistory()">清空</button>
+		</div>
+
+	</div>
+
+
+</div>

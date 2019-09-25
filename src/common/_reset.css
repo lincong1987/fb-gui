@@ -1,0 +1,139 @@
+/*
+ This file 'reset.less' is part of Firebird Integrated Solution 1.0
+
+ Copyright (c) 2019 Lincong
+
+ Contact:  
+        Email: lincong1987@gmail.com
+
+        QQ: 159257119
+ 
+ See Usage at http://www.jplatformx.com/firebird
+
+ Create date: 2019-07-23 15:39
+ */
+html {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft YaHei", SimSun, sans-serif;
+  background: #000946;
+}
+#app {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  transform-origin: top left;
+}
+#app:empty:before {
+  content: "Loading...";
+  width: fit-content;
+  display: flex;
+  height: 100%;
+  margin: 15% auto;
+  color: #fff;
+  font-size: 20px;
+}
+.text--center {
+  text-align: center;
+}
+.text--left {
+  text-align: left;
+}
+.text--right {
+  text-align: right;
+}
+.text--break {
+  white-space: normal;
+  word-break: break-all;
+}
+.min-width-120 {
+  min-width: 120px;
+}
+.nowrap {
+  white-space: nowrap;
+}
+html {
+  overflow-x: visible !important;
+}
+/*
+ This file 'reset.less' is part of Firebird Integrated Solution 1.0
+
+ Copyright (c) 2019 Lincong
+
+ Contact:  
+        Email: lincong1987@gmail.com
+
+        QQ: 159257119
+ 
+ See Usage at http://www.jplatformx.com/firebird
+
+ Create date: 2019-07-23 15:39
+ */
+@font-face {
+  font-family: "DINPro-Bold";
+  src: url('DINPro-Bold.eot?t=1564254312317');
+  src: url('DINPro-Bold.eot?t=1564254312317#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAk8AAsAAAAAEawAAAjuAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDRAqVcJBXATYCJAMgCxIABCAFhG0HgQAbOQ4RVaztIftxYDde7WD/oig5IR5q8SVM+nna1PfvH3ZEEI9qmwsV3+qCtE7irGaRNRxTGmpxxWoiSE2ZiHD/c8M09AtpQuR11rE+uS92E++0TEqECKHRAAEEY4fWXJ1qI+qsslCQWl7sZAJ+P8w8QaVEQjLxEGkWQkRjOQl04ldxfXUnAwQAFERCOqCx46dqgAskEERot8xYkAVcXzqQKU4E3CA7ZkcS0A5gAZfYTNwEgO3m36NvQI24AASwMNCpZuaPy4WRfuTnYCbAwEL8EXxcH4PdWQCAASAdAEgAZIiNzAdsg3QTUXEREvqmQxJFfk4goKsQ21sGTQnAQALrAziXfx4bCAVBm1vLAfAjFYKJCUAAxoAATAICMAsQgNmAAMyBChDsmx0BBADwHgA2AZBqoEB/gfAaEhYE6/1EwqCgDB4VJMJKEfKjB4i85cEh4dJ7CU/J44VDQfQ5vLVUr1OFmlxWhxL4PQ7GPtfr1/m+0Hvead1vS9xujcej9fn0Xm9p6+lEr662trdb8sFU7KMxnhE1Nrm+rlbm3I/4Vo+2psfmkvv0tgtFl72xXb4JfCLL69Xh0tt6Pipt2nPi0LFdivqTl0+XmF0VbLHaZj22q3lnfPfl/V36pqjGzQr7xeuda6Czyot6d+c+ToKjY+9Fbfnx3W17TiT0nGo/ubSxkgHKhvarl4sa2/hmKxmJprpcpqs1u6xSLUuPdgCpr5PWakc9Iu1h4jUtbrc3stU3yJYX1Os0u5KCBy5rqHLBTkKToKCD3tv7kyMPfAMCveOp3puK+hbHoXyLl5zxTQCmocdqa0JoHhahyu2MI4FvdaHZO4T7rYZx8Pk2l9lJUV2+96U1kVs2NcpWOjzJ9Ufje093HkjCPZKVuVTTTj7fmliPdC4Tt0SzfWG5E5nr5HXpLTW9slpZ4568k9eWS1mnYlLbXBVIEsqolhRs1HSkp0VR7f2EEuuxU7uAaEnxuDV2t9eb6jXr65oQNu85c0Jf7r7rBsLt0Xp8ep9Zh83e+97SiUZHVqzk4umSRlel7L62d3frnhPWhJ6VgY1PYTUGidQltpyYWeEtcmzHdrXsPEqVn+48Y2yqItKiqF/t1CvXilMWWc7YFw6QOnEi1iISp1nOKZCatU0XJiqYbX0/p7bR3GSzSntadh6c+6DzLtjT0FAv6T68u21+nQ0aBmf12QjMTJXghdZuL24AkwsHk+xGzZHEy9NKbE/OnVFsHRguHSSz1gzo2GkYLOAc71oV4LzlBGiduNasujQ+f+URGR1NatIjTkN0OwV3bbbjly8xJLugIYoLwUh0Ft6/xu6Kbk8L5M0tnJb7zlgCZxejsjKEh11ctmkx8X7Gysd50fr+I8eHagtbYkeWvvtgWo5Rnwuq6A525+PozB+zZk2cwGKrC85k4OvWGeNuzFrBwso1bsycMV6yPRoGnivDmbEGiQhH1J4tHrg3UuIzSvp8iQPhisS4GA6t3GV690d79Q7xKhzL3sH7cIbXf6dClCyOY7dzl033XW1VxqTQagPFXH6z4s0AiTiONVtIvyqOqAs/UJE0iliFKx7/schEz2qqYKlFq8gdT35fbCr7Wfqsq/dZqsh5nnrCiJoxK06Wc1IaZx36WeoJULw5cOBF1X+RGVH79h1LnDBbMSHxqnSULXW3jeqRz1JvzlTPvJl2UxrIl3pU+VtOfKweLV3xvzhJNWHjhLA1tvCiM22/yN8T7t1MCR+P/FxK1TW6Iy8lnw65si1s25UQeov47FnxVlp2M/3GzFqgdCHCD0kZRC0K7WWrfDAZnZ+cq/r/e2koc3JRI6T++lowKvRAnuHuvj/nbDss/jx+I2HSpIHFXECUJt6Y8LnCoRV5En4u0EZvjLcInRe1iLTiInJDPogsIu7KcTdjG2ItApfguC5p3SdyoYUVfTsnTVDYKU4TFQkcOiGIQCdAmsCJLkUinago4TMBliQscRZ8IjeXpjnOywMYbgf/c9eQpLuuFKeqHozpq8pARcNHgeO9kd9Ni9LA1Ohnvg3sw0e6bgsyVH37PVBq0qIOfDJqWlqGbiHxnX7+Au33aL5es+AbzfyMNCadTKB3A2DWfllDbKYk2Hi2d+DZSOx7BRxcfLZ23zzuSE5MfKJyzx/vVhZu2CHrh5NFFV998d6HdFYzM3ztf0THPcqgzkzO5O1a/uaKXEPHjGLHiiWRdUHGufsq8CpRJrviL9OiP/x3/taBR5WbT0o3QHhmnFGYclMaa0nP0CzleVfP81RNhlWmI8TIWRq5vaFq8P0V9dWeSN9wZ6HrdJj3Yfp690sWNVUvuxK5+6uQv65MdlpO1Kiv3N3zVdRXl6e4LK6fj4hFCYa4TElk8bm6Ph+MikJ60TlEJwvjk3iLekx3/UqaEyNOUrRh86hN7ew4nCKqeOx/bxm9url9GF1XiXd87X9/0+K4IS5Kp8Qod614c1l5gUPVtBYnk7d7xS8+4cdSyYhrw4vRm+XjT6Xv+paYt48hk4Wjk3b8Dd1dGd4HahL4nwT8kXkcEw5gU+C/wCYSYQYgUIb3sBgG/49N0JzGn0NXgp9OPbxOXxI6/Dcu/2+1/FH2OSH48nR9JcBFJOUicMZMHTwVAfEjUAZ3r8HqrMB/fjZ3HNddEDF1AkouBwgAFYj8eECamzstB6Sui8ARAXCcNh6Q0Ka7WPj6Aza077soaaLd+cRKc2g8AEj1ggsReLsIIc4ADO0HkNB+XSwyf4kNa9hF0SU+IF9iRmrMGoxrzCAZQKbkmJJV76z2V+SNiUsuSGs9sawkOQj70r/6CB2WdWxStfxU1wxYSRYubAM0hiAvSWFaewJ1+dnPyL9v6qVkJztjlFCs1n0zIDH4SynisLlru9DvXyGuYcTKlGHf/k+oVJHzByFPkEMZIZdr2L50rbS4k5oTBtS+JWKBCyfIyDUE5PHLKShV84gSVbkzn0/H8iKv/YDd0gg234j0aNwIhBGJWIiNOIiLeCC+oGYU6DQ5XgmpZOzW61zFWL4vMsbRWy5WG4d4Vbyy6dAd1xbGidwzuPmkTSYA') format('woff2'), url('DINPro-Bold.woff?t=1564254312317') format('woff'), url('DINPro-Bold.ttf?t=1564254312317') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */ url('DINPro-Bold.svg?t=1564254312317#iconfont') format('svg');
+  
+  /* IE9 */
+  /* iOS 4.1- */
+}
+.text-slider ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.progress-circle {
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+}
+.progress-circle .left-wrap {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+.progress-circle .right-wrap {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+.progress-circle .loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0% 50%;
+}
+.progress-circle .loader2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 100% 50%;
+}
+.progress-circle .inner-circle {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.drag-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: none;
+}
+.layer:hover .drag-handle {
+  display: block;
+}
+/*# sourceMappingURL=_reset.css.map */
